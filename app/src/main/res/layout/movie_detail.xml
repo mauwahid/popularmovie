@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="38dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="15dp"
+        android:text="Dilwale Dulhania Le Jayenge"
+        android:textAlignment="textStart"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/img_detail"
+        android:layout_width="@dimen/detail_movie_width"
+        android:layout_height="@dimen/detail_movie_height"
+        android:layout_alignLeft="@+id/tv_title"
+        android:layout_alignStart="@+id/tv_title"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginTop="10dp"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        app:srcCompat="@drawable/sample_movie" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Not Available"
+        android:textSize="10sp"
+        android:layout_marginTop="29dp"
+        android:layout_alignTop="@+id/img_detail"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/tv_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Not Available"
+        android:textSize="10sp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/tv_date"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/tv_sinopsis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lines="24"
+        android:layout_marginRight="2dp"
+        android:text="Not Available"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tv_rating"
+        android:layout_alignLeft="@+id/tv_date"
+        android:layout_alignStart="@+id/tv_date" />
+
+
+</RelativeLayout>

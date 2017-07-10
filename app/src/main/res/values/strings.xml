@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+    <string name="detail_activity">Detail Movie</string>
+    <string name="menu_most_popular">Most Popular</string>
+    <string name="menu_top_rated">Top Rated</string>
+
+    <string name="content_authority">com.mauwahid.popularmovies</string>
+
+</resources>
