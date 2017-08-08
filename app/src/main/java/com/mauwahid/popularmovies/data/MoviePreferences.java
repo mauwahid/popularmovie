@@ -13,6 +13,7 @@ public class MoviePreferences {
 
     public static final int ORDER_MOST_POPULAR = 4;
     public static final int ORDER_TOP_RATED = 5;
+    public static final int ORDER_FAVORITES = 6;
 
     private static final int DEFAULT_SORT_ORDER = ORDER_MOST_POPULAR;
 
@@ -32,8 +33,5 @@ public class MoviePreferences {
 
         return sp.getInt(PREF_SORT_ORDER, DEFAULT_SORT_ORDER);
     }
-
-
-
 
 }

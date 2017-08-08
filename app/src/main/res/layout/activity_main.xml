@@ -16,4 +16,14 @@
         android:layout_gravity="center"
         android:visibility="invisible" />
 
+    <TextView
+        android:id="@+id/tv_connection_info"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/conn_not_available"
+        android:visibility="invisible" />
+
+
+
 </FrameLayout>

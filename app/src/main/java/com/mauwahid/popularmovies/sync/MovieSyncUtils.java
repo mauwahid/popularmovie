@@ -15,6 +15,7 @@ import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.Trigger;
 import com.mauwahid.popularmovies.data.MovieContract;
+import com.mauwahid.popularmovies.data.MoviePreferences;
 
 import java.util.concurrent.TimeUnit;
 
@@ -62,12 +63,36 @@ public class MovieSyncUtils {
 
         scheduleFirebaseJobDispatcherSync(context);
 
+        dataProcessing(context);
+
+    }
+
+
+    public static void dataProcessing(final Context context){
+
         Thread checkForEmpty = new Thread(new Runnable() {
             @Override
             public void run() {
-                Uri movieQuiryUri = MovieContract.MovieEntry.CONTENT_URI;
+
+                Uri movieQuiryUri = MovieContract.MovieEntry.POPULAR_URI;
+
+                switch(MoviePreferences.getSortOrder(context)){
+                    case MoviePreferences.ORDER_MOST_POPULAR :
+                        movieQuiryUri =  MovieContract.MovieEntry.POPULAR_URI;
+                        break;
+                    case MoviePreferences.ORDER_FAVORITES :
+                        movieQuiryUri = MovieContract.MovieEntry.FAVE_URI;
+                        break;
+                    case MoviePreferences.ORDER_TOP_RATED:
+                        movieQuiryUri = MovieContract.MovieEntry.TOP_RATED_URI;
+                        break;
+
+                }
+
+
+
                 String[] projectionColumns = {MovieContract.MovieEntry._ID};
-                String selectionStatement = MovieContract.MovieEntry.getSqlSelect();
+                  String selectionStatement = MovieContract.MovieEntry.getSqlSelect();
 
                 Cursor cursor = context.getContentResolver().query(
                         movieQuiryUri,
@@ -77,22 +102,23 @@ public class MovieSyncUtils {
                         null
                 );
 
-                if (null == cursor || cursor.getCount() == 0) {
+                if ((null == cursor || cursor.getCount() == 0) &&
+                    MoviePreferences.getSortOrder(context)!=MoviePreferences.ORDER_FAVORITES ) {
+
                     startImmediateSync(context);
                 }
 
-                /* Make sure to close the Cursor to avoid memory leaks! */
                 cursor.close();
 
             }
         });
+
 
         checkForEmpty.start();
 
     }
 
     public static void startImmediateSync(@NonNull final Context context) {
-        Log.v(TAG,"ImmediateSync");
         Intent intentToSyncImmediately = new Intent(context, MovieSyncIntentService.class);
         context.startService(intentToSyncImmediately);
     }

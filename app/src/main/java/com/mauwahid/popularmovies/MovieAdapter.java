@@ -27,10 +27,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     @Override
     public void onBindViewHolder(MovieAdapterViewHolder holder, int position) {
         mCursor.moveToPosition(position);
-
-        int movieId = mCursor.getInt(MainActivity.INDEX_MOVIE_ID);
         String posterPath = mCursor.getString(MainActivity.INDEX_COLUMN_POSTER_PATH);
-
         Picasso.with(mContext).load(NetworkUtils.POSTER_MOVIE_URL+posterPath).into(holder.imgMovie);
     }
 

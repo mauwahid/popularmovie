@@ -5,11 +5,17 @@
     tools:context=".MainActivity">
     <item
         android:id="@+id/action_most_popular"
-        android:orderInCategory="100"
+        android:orderInCategory="1"
         android:title="@string/menu_most_popular"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_top_rated"
         android:title="@string/menu_top_rated"
+        android:orderInCategory="2"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_favorites"
+        android:title="@string/menu_favorites"
+        android:orderInCategory="3"
         app:showAsAction="never" />
 </menu>
