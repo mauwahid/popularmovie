@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -123,7 +122,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         String selection = MovieContract.MovieEntry.getSqlSelect();
-        Log.v(TAG, "Call onCreateLoader-Cursor Loader "+movieQueryUri);
 
         return new CursorLoader(this,
                 movieQueryUri,
@@ -221,6 +219,7 @@ public class MainActivity extends AppCompatActivity
 
         showLoading();
         loadTitle();
+        MovieSyncUtils.dataProcessing(this);
         getSupportLoaderManager().restartLoader(ID_MOVIE_LOADER,null,this);
     }
 

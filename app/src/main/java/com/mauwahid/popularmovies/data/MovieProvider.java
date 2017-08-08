@@ -83,7 +83,6 @@ public class MovieProvider extends ContentProvider {
 
                         value.put(MovieContract.MovieEntry.COLUMN_IS_TOP_RATED,1);
 
-                        Log.v(TAG,"Insert Movie Top");
 
                         Cursor cursor = db.query(MovieContract.MovieEntry.TABLE_NAME,
                                 MainActivity.MAIN_MOVIE_PROJECTION,
@@ -120,7 +119,6 @@ public class MovieProvider extends ContentProvider {
                 try{
                     for(ContentValues value : values){
 
-                        Log.v(TAG,"Insert Movie Popular");
 
                         value.put(MovieContract.MovieEntry.COLUMN_IS_POPULAR,1);
 

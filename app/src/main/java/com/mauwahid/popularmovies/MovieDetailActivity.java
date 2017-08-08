@@ -164,8 +164,11 @@ public class MovieDetailActivity extends AppCompatActivity
         Picasso.with(this).load(posterPath).into(imgPoster);
         Picasso.with(this).load(backdrop).into(imgBackdrop);
 
-        changeImageFave();
-
+        if(checkIsFavorites(movieId)){
+            fab.setImageResource(R.drawable.ic_favorite_white_24dp);
+        }else{
+            fab.setImageResource(R.drawable.ic_favorite_border_white_24dp);
+        }
         new GetTrailers().execute();
     }
 
@@ -260,26 +263,25 @@ public class MovieDetailActivity extends AppCompatActivity
 
     }
 
-    private void onChangeFavorite(){
+    private void onChangeFavorite() {
         ContentValues cv = new ContentValues();
-        cv.put(MovieContract.MovieEntry.COLUMN_MOVIE_ID,movieId);
+        cv.put(MovieContract.MovieEntry.COLUMN_MOVIE_ID, movieId);
 
-        if(checkIsFavorites(movieId)){
+        boolean isFav = checkIsFavorites(movieId);
+        if (isFav) {
             cv.put(MovieContract.MovieEntry.COLUMN_IS_FAVORITES, 0);
-        }else{
+
+        } else {
             cv.put(MovieContract.MovieEntry.COLUMN_IS_FAVORITES, 1);
         }
+        boolean success = insUpdFavorite(cv);
 
-        insUpdFavorite(cv);
-        checkIsFavorites(movieId);
-        changeImageFave();
-    }
-
-    private void changeImageFave(){
-        if(checkIsFavorites(movieId)){
-            fab.setImageResource(R.drawable.ic_favorite_white_24dp);
-        }else{
-            fab.setImageResource(R.drawable.ic_favorite_border_white_24dp);
+        if (success) {
+            if (!isFav) {
+                fab.setImageResource(R.drawable.ic_favorite_white_24dp);
+            } else {
+                fab.setImageResource(R.drawable.ic_favorite_border_white_24dp);
+            }
         }
     }
 

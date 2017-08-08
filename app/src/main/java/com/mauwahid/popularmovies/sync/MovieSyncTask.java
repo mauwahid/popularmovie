@@ -45,8 +45,6 @@ public class MovieSyncTask {
 
                 }
 
-               // movieContentResolver.delete(MovieContract.MovieEntry.MOVIE_URI,null,null);
-
 
                 movieContentResolver.bulkInsert(
                         insertUri,

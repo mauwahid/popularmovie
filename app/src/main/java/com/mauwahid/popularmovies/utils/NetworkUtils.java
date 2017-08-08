@@ -66,6 +66,7 @@ public final class NetworkUtils {
 
         if(type == MoviePreferences.ORDER_TOP_RATED){
             movieURL = TOP_RATED_MOVIE_URL;
+            Log.v(TAG,"SELECT TOP RATED "+movieURL);
         }
 
         Uri moviesQueryUri = Uri.parse(movieURL).buildUpon()
