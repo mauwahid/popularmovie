@@ -287,7 +287,23 @@ public class MovieProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String s, @Nullable String[] strings) {
-        return 0;
+        int status = 0;
+        switch (sUriMatcher.match(uri)) {
+
+            case CODE_MOVIE_FAVORITES:
+                final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
+                status = db.update(MovieContract.MovieEntry.TABLE_NAME,contentValues,
+                        MovieContract.MovieEntry.COLUMN_MOVIE_ID + "= ?",
+                        new String[]{contentValues.getAsString(MovieContract.MovieEntry.COLUMN_MOVIE_ID)});
+                db.close();
+
+                break;
+
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+
+        return status;
     }
 
 

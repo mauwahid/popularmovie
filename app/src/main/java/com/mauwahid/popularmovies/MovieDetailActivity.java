@@ -274,9 +274,8 @@ public class MovieDetailActivity extends AppCompatActivity
         } else {
             cv.put(MovieContract.MovieEntry.COLUMN_IS_FAVORITES, 1);
         }
-        boolean success = insUpdFavorite(cv);
 
-        if (success) {
+        if (updFavorite(cv)>0) {
             if (!isFav) {
                 fab.setImageResource(R.drawable.ic_favorite_white_24dp);
             } else {
@@ -285,25 +284,12 @@ public class MovieDetailActivity extends AppCompatActivity
         }
     }
 
-    public boolean insUpdFavorite(ContentValues cv) {
-
-        MovieDBHelper mOpenHelper = new MovieDBHelper(this);
-
-        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
-        boolean isSuccess = false;
-        long status = db.update(MovieContract.MovieEntry.TABLE_NAME,cv,
-                MovieContract.MovieEntry.COLUMN_MOVIE_ID + "= ?",
-                new String[]{cv.getAsString(MovieContract.MovieEntry.COLUMN_MOVIE_ID)});
-        db.close();
-
-        if(status>0)
-            isSuccess = true;
-
-        return  isSuccess;
 
 
+    public int updFavorite(ContentValues cv) {
+        Uri movieQueryUri = MovieContract.MovieEntry.FAVE_URI;
+        return this.getContentResolver().update(movieQueryUri,cv,null,null);
     }
-
 
     //Trailer
 
